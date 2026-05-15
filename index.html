@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIGH SCORE HUNT - Das VR-Turnier 2026</title>
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self';">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="High Score Hunt 2026 - Das ultimative VR-Turnier in Deutschland mit 5.000€ Preisgeld. Tritt in 9 VR-Arenen an und sichere dir einen der begehrten Schlüssel für das große Finale in Unna!">
+    <meta name="keywords" content="VR Turnier, Virtual Reality, Gaming, E-Sport, Deutschland, Köln, High Score Hunt">
+    <meta name="author" content="Parzival VR & Die Zockstube VR">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HIGH SCORE HUNT - Das VR-Turnier 2026">
+    <meta property="og:description" content="Deutschlands VR-PVE-Turnier mit 5.000€ Preisgeld. Jetzt in einer der 9 VR-Arenen antreten!">
+    <meta property="og:image" content="assets/HSH Logos/HSH Logo - NEU.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HIGH SCORE HUNT - Das VR-Turnier 2026">
+    <meta name="twitter:description" content="Deutschlands VR-PVE-Turnier mit 5.000€ Preisgeld">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+
+</head>
+<body>
+
+        <!-- Cookie Banner -->
+<div class="cookie-banner" id="cookieBanner" style="text-align: center; margin-bottom: 50px;">
+    <p>We use cookies to improve your experience. By using our site, you agree to our<a href="cookie.html"> cookie policy. </a></p>
+    <button onclick="acceptCookies()">Accept</button>
+</div>
+
+    <!-- Particle Network Canvas with Perlin Noise -->
+    <canvas id="particleCanvas" class="particle-network-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="#" class="logo">HIGH SCORE HUNT</a>
+            </div>
+            <div class="nav-links">
+                <a href="#tournament">Das Turnier</a>
+                <a href="#locations">Arenen</a>
+                <a href="#organizers">Veranstalter</a>
+                <a href="#sponsors">Partner</a>
+                <a href="#rules">Regeln</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Orbiting Keys Animation -->
+                <div class="orbiting-keys">
+                    <div class="orbit-center">
+                        <img src="assets/HSH Logos/HSH Logo - NEU.png" alt="HSH Logo" class="center-logo">
+                    </div>
+                    <div class="key-orbit key-orbit-1">
+                        <img src="assets/HSH Logos/Schlüssel Gold NEU.png" alt="Gold Key" class="key-icon">
+                    </div>
+                    <div class="key-orbit key-orbit-2">
+                        <img src="assets/HSH Logos/Silber Schlüssel.png" alt="Silver Key" class="key-icon">
+                    </div>
+                    <div class="key-orbit key-orbit-3">
+                        <img src="assets/HSH Logos/Schlüssel Bronze.png" alt="Bronze Key" class="key-icon">
+                    </div>
+                </div>
+
+                <div class="event-date">Das VR-Turnier 2026 | Preisgeld i.H.v 5.000 Euro</div>
+                <h1 class="hero-title">ARE YOU READY<br>PLAYERS ??</h1>
+                <p class="hero-subtitle">Die High Score Hunt – Das ultimative VR-Event – bei dem die Spieler im reinen PVE-Modus gegeneinander antreten, um sich einen Platz auf dem Scoreboard zu sichern.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">VR Arenen</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5.000€</div>
+                        <div class="stat-label">Preisgeld</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Schlüssel</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">100 / Stk.</div>
+                        <div class="stat-label">Wildcards</div>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#locations" class="btn-primary">Standorte ansehen</a>
+                    <a href="#tournament" class="btn-secondary">Mehr erfahren</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament Details Section -->
+    <section id="tournament" class="tournament-details">
+        <div class="container">
+            <h2 class="hsh-finale-title">Wie funktioniert das Turnier?</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="assets/HSH Logos/Scoreboard Bild.png" alt="Scoreboard">
+                    </div>
+                    <h3>Scoreboard</h3>
+                    <p>Sichere dir einen Platz auf dem Scoreboard!</p>
+                    <p>Du kannst in jeder teilnehmenden VR-Arena so oft antreten, wie du möchtest – jedes neue Spiel ist eine neue Chance deinen Highscore zu verbessern!</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="assets/HSH Logos/Schlüssel 3.png" alt="Die Schlüssel">
+                    </div>
+                    <h3>Keys</h3>
+                    <p>Die drei Besten Spieler aus jeder teilnehmenden VR-Arenen bekommen jeweils einen Schlüssel – in Bronze, Silber und Gold.</p>
+                    <p>Diese Schlüssel sind die Eintrittskarten für das große Finale in Unna, bei dem alle Schlüsselträger zusammenkommen, um nochmal ihren besten High Score abzuliefern und um das Preisgeld spielen.</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="assets/HSH Logos/Wildcard.png" alt="Wildcard">
+                    </div>
+                    <h3>Die Wildcards</h3>
+                    <p>Die Plätze 4 – 10 bekommen eine Wildcard! Welche zur Teilnahme an einer Verlosung vor Ort dient.</p>
+                    <p><strong>Zu gewinnen:</strong> Meta Quest 3, haptische Feedback-Weste von Truegear sowie viele weitere VR-Arena Gutscheine.</p>
+                    <!-- <p>Sollten die Finalisten auf den Plätzen 1–3 nicht erscheinen, rücken die Wildcard-Besitzer entsprechend ihres High Scores nach!</p>
+                    <p><strong>Vorbeikommen lohnt sich!</strong></p> -->
+                </div>
+                
+            </div>
+            
+        </div>
+    </section>
+ <section id="tournament" class="tournament-details" style="padding: 0px;">
+    <div class="container">
+        <div class="games-grid">
+            <div class="game-card" style="word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; word-break: normal;">
+               
+                <p style="margin-top: 12px;"><strong>Sollten die Finalisten auf den Plätzen 1–3 der teilnehmenden VR-Arenen nicht im Finale erscheinen, rücken die Wildcard-Besitzer aus der gleichen VR-Arena entsprechend ihres High Scores nach und dürfen am Finale teilnehmen. Vorbeikommen lohnt sich!</strong></p>
+         </div>
+        </div>
+    </div>
+</section>
+    
+
+    <!-- HSH8 - Das Finale Section -->
+    <section id="tournament" class="tournament-details">
+    <div class="container">
+        <h2 class="hsh-finale-title">Wie funktioniert das Turnier?</h2>
+        <div class="games-grid">
+            <div class="game-card" style="word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; word-break: normal;">
+                <h3 style="color: #c2185b;">Das Finale in Unna - vor Ort -</h3>
+                <p style="margin-top: 12px;"><strong>Mehr als nur ein Wettkampf</strong></p>
+                <p style="margin-top: 12px;">Erlebe das Finale als Teil einer einzigartigen Community aus Gamern, VR-Enthusiasten, Entwicklern und Tech-Begeisterten.</p>
+                <p style="margin-top: 12px;">Triff Gleichgesinnte und komm mit Unternehmen der XR / VR / AR Branche ins Gespräch.</p>
+                <p style="margin-top: 12px;">Für dein leibliches Wohl wird gesorgt: Snacks und Kaltgetränke werden vor Ort angeboten.</p>
+                <p style="margin-top: 12px;">Kostenloser Eintritt für Zuschauer! Komm vorbei, vernetze dich und werde Teil des VR-Events des Jahres.</p>
+                <p style="margin-top: 12px;">Das Event wird vom ESBD unterstützt, was es zu einem bedeutenden Meilenstein in der deutschen E-Sport und VR-Landschaft macht.</p>
+                <p style="margin-top: 24px;">Wir freuen uns auf euch - Das High Score Hunt Team!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- VR Arena Locations Section -->
+    <section id="locations" class="who-attends">
+        <div class="container">
+            <h2 class="hsh-finale-title">VR Arena Standorte in Deutschland</h2>
+            <div class="attendee-grid">
+           
+                <a href="https://www.7th-space.com/" target="_blank" rel="noopener noreferrer" class="attendee-card">
+                    <div class="location-icon"><img src="assets/HSH Logos/7th-space- NEU.png" alt="7th Space" style="width: auto; height: 60px;"></div>
+                    <h3>Düsseldorf</h3>
+                    <p>7th Space</p>
+                </a>
+         
+                <a href="https://zerolatencyvr.nrw/" target="_blank" rel="noopener noreferrer" class="attendee-card">
+                    <div class="location-icon"><img src="assets/HSH Logos/Zero_Latency_logo.png" alt="Zero Latency" style="width: auto; height: 60px;"></div>
+                    <h3>Dortmund</h3>
+                    <p>Zero Latency</p>
+                </a>
+                <a href="https://macflay.de/jetzt-buchen/" target="_blank" rel="noopener noreferrer" class="attendee-card">
+                    <div class="location-icon"><img src="assets/HSH Logos/Macfly NEU.png" alt="MACFLY" style="width: auto; height: 60px;"></div>
+                    <h3>Koblenz</h3>
+                    <p>MACFLAY ADVENTURE</p>
+                </a>
+                <a href="https://www.funderground.de/virtual-reality/" target="_blank" rel="noopener noreferrer" class="attendee-card">
+                    <div class="location-icon"><img src="assets/HSH Logos/FG_yellow.png" alt="VR Arena" style="width: auto; height: 60px;"></div>
+                    <h3>Troisdorf</h3>
+                    <p>VR Arena</p>
+                </a>
+              
+                <a href="https://virtual-area.de/" target="_blank" rel="noopener noreferrer" class="attendee-card">
+                    <div class="location-icon"><img src="assets/HSH Logos/Virtual Area NEU.png" alt="Virtual Area" style="width: auto; height: 60px;"></div>
+                    <h3>Aachen</h3>
+                    <p>Virtual Area</p>
+                </a>
+                <a href="https://www.funderground.de/virtual-reality/" target="_blank" rel="noopener noreferrer" class="attendee-card">
+                    <div class="location-icon"><img src="assets/HSH Logos/FG_yellow.png" alt="VR Parks" style="width: auto; height: 60px;"></div>
+                    <h3>Unna</h3>
+                    <p>VR Parks</p>
+                </a>
+                  
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament System Section -->
+    <!-- <section id="tournament" class="tournament-games">
+        <div class="container">
+            <h2 class="section-title">Das Turnier-System</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-image placeholder-image">📊</div>
+                    <h3>Scoreboard</h3>
+                    <p>Die besten 16 Spieler qualifizieren sich für das Finale</p>
+                    <p>Kämpfe um deinen Platz an der Spitze</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-image placeholder-image">🥉</div>
+                    <h3>Bronzeschlüssel</h3>
+                    <p>Top 3 in jeder Arena</p>
+                    <p>Direkter Weg zum Finale</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-image placeholder-image">🥈</div>
+                    <h3>Silberschlüssel</h3>
+                    <p>Top 2 in jeder Arena</p>
+                    <p>Garantierter Finalplatz</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-image placeholder-image">🥇</div>
+                    <h3>Goldschlüssel</h3>
+                    <p>Arena Champion</p>
+                    <p>Höchste Ehre & Finale-Ticket</p>
+                </div>
+            </div>
+            <div style="margin-top: 60px;">
+                <h3 style="text-align: center; font-size: 2rem; margin-bottom: 20px;">🎴 Wildcard</h3>
+                <p style="text-align: center; font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+                    Eine zusätzliche Chance für Spieler, die knapp das Finale verpasst haben. Die Wildcard wird basierend auf der Gesamtleistung vergeben.
+                </p>
+            </div>
+            <div style="margin-top: 60px; text-align: center;">
+                <h3 style="font-size: 2rem; margin-bottom: 20px;">🏆 Das Finale</h3>
+                <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
+                    Die Top 16 Spieler treten im großen Finale in <strong>Köln</strong> an, um den Champion zu krönen und das Preisgeld von <strong>5.000 Euro</strong> zu gewinnen!
+                </p>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Organizers Section -->
+    <section id="organizers" class="schedule">
+        <div class="container">
+            <h2 class="hsh-finale-title">Die Veranstalter</h2>
+            <div class="schedule-content" style="max-width: 900px; margin: 0 auto;">
+                <div class="schedule-day" style="text-align: center; margin-bottom: 50px;">
+                    <h3 style="font-size: 2.5rem; margin-bottom: 30px;">🎮 YouTuber & VR-Enthusiasten</h3>
+                    <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;">
+                        Die High Score Hunt wird von zwei leidenschaftlichen VR-YouTubern organisiert, die ihre Liebe zur Virtual Reality mit der Community teilen möchten.
+                    </p>
+                </div>
+               <div class="organizers-grid" style="gap: 40px; margin-top: 40px;">
+                    <div style="text-align: center; padding: 30px; background: var(--bg-card); border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.2);">
+                        <div style="margin-bottom: 5px;"><img src="assets/HSH Logos/KanalLogo.png" alt="Parzival VR" style="width: 350px; height: auto;"></div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary-cyan);">Parzival VR</h3>
+                        <p style="font-size: 1.1rem; margin-bottom: 15px;">VR Gaming Content Creator</p>
+                        <a href="mailto:parzival.koop@gmail.de" style="color: var(--primary-magenta); text-decoration: none; font-size: 0.95rem;">parzival.koop@gmail.de</a>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: var(--bg-card); border-radius: 12px; border: 1px solid rgba(255, 0, 128, 0.2);">
+                        <div style="margin-bottom: 5px;"><img src="assets/HSH Logos/Die Zpckstubet-2.png" alt="Die Zockstube VR" style="width: 400px; height: auto;"></div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary-magenta);">Die Zockstube VR</h3>
+                        <p style="font-size: 1.1rem; margin-bottom: 15px;">VR Gaming Content Creator</p>
+                        <a href="mailto:patrick@diezockstube.de" style="color: var(--primary-cyan); text-decoration: none; font-size: 0.95rem;">patrick@diezockstube.de</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="sponsors">
+        <div class="container">
+            <h2 class="hsh-finale-title">Die Sponsoren des Events</h2>
+            <div style="max-width: 1200px; margin: 0 auto; background: var(--bg-card); border-radius: 20px; padding: 60px 40px; border: 1px solid rgba(0, 212, 255, 0.1); box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; align-items: center; justify-items: center;">
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/RAUM.png" alt="RAUM">
+                    </div>
+                     <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/WoVR.png" alt="World of XR">
+                    </div>
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/7th-space- NEU.png" alt="7th Space">
+                    </div>
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/ESBD-Logo-360-x-180-400x200.png" alt="ESBD">
+                    </div>
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/Macfly NEU.png" alt="Macflay Adventure">
+                    </div>
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/Timeride Neu.png" alt="Timeride">
+                    </div>
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/Virtual Area NEU.png" alt="Virtual Area">
+                    </div>
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/Zero_Latency_logo.png" alt="Zero Latency">
+                    </div>
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/VR Parks Unna Logo.png" alt="VR Parks Unna">
+                    </div>
+                    <div class="sponsor-logo">
+                        <img src="assets/HSH Logos/FG_yellow.png" alt="Funderground">
+                    </div>
+                   
+                </div>
+                <div style="margin-top: 50px; text-align: center;">
+                    <p style="font-size: 1.1rem; color: var(--primary-cyan);">
+                        Vielen Dank an alle unsere Partner für die Unterstützung der High Score Hunt 2026!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+
+    <!-- Rules Summary Section -->
+    <section id="rules" class="rules-summary">
+        <div class="container">
+            <h2 class="hsh-finale-title">Die Spielregeln</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: var(--text-gray); max-width: 800px; margin: 0 auto 20px auto;">
+                Lies dir die offiziellen Regeln durch, bevor du am Turnier teilnimmst. Mit deiner Anmeldung erkennst du diese Regeln verbindlich an.
+            </p>
+            <div class="rules-grid">
+                <a href="rules.html#rule-1" class="rules-card">
+                    <div class="rules-icon">👥</div>
+                    <h3>Teilnahme</h3>
+                    <p>Mindestalter 16 Jahre. Teilnehmer unter 18 Jahren benötigen eine Einverständniserklärung.</p>
+                    <span class="rules-read-more">Mehr erfahren →</span>
+                </a>
+                <a href="rules.html#rule-2" class="rules-card">
+                    <div class="rules-icon">🎮</div>
+                    <h3>Gameplay</h3>
+                    <p>Die besten 3 Spieler jeder Arena qualifizieren sich fürs Finale.</p>
+                    <span class="rules-read-more">Mehr erfahren →</span>
+                </a>
+                <a href="rules.html#rule-3" class="rules-card">
+                    <div class="rules-icon">🏆</div>
+                    <h3>Punktesystem</h3>
+                    <p>Bewertung erfolgt ausschließlich anhand der im Spiel erreichten Punkte.</p>
+                    <span class="rules-read-more">Mehr erfahren →</span>
+                </a>
+                <a href="rules.html#rule-4" class="rules-card">
+                    <div class="rules-icon">⚖️</div>
+                    <h3>Fair Play & Verhalten</h3>
+                    <p>Betrug, Manipulation oder diskriminierendes Verhalten führen zum sofortigen Ausschluss.</p>
+                    <span class="rules-read-more">Mehr erfahren →</span>
+                </a>
+                <a href="rules.html#rule-5" class="rules-card">
+                    <div class="rules-icon">🥽</div>
+                    <h3>Ausrüstung & Technik</h3>
+                    <p>VR-Ausrüstung wird gestellt. Eigene Hardware ist nicht erlaubt.</p>
+                    <span class="rules-read-more">Mehr erfahren →</span>
+                </a>
+                <a href="rules.html#rule-6" class="rules-card">
+                    <div class="rules-icon">📋</div>
+                    <h3>Weitere Regeln</h3>
+                    <p>Haftungsausschluss, Datenschutz, Bild- und Tonaufnahmen und mehr.</p>
+                    <span class="rules-read-more">Mehr erfahren →</span>
+                </a>
+            </div>
+           
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HIGH SCORE HUNT</h3>
+                    <p>Das ultimative VR-Turnier 2026</p>
+                    <p class="location">Finale in Unna<br>5.000€ Preisgeld</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Turnier</h4>
+                    <ul>
+                        <li><a href="#locations">Standorte</a></li>
+                        <li><a href="#tournament">Turnier-System</a></li>
+                        <li><a href="#rules">Spielregeln</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="#organizers">Veranstalter</a></li>
+                        <li><a href="#sponsors">Sponsoren</a></li>
+                        <li><a href="mailto:parzival.koop@gmail.de">Kontakt Parzival VR</a></li>
+                        <li><a href="mailto:patrick@diezockstube.de">Kontakt Zockstube</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Social Media</h4>
+                    <div class="social-links">
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="YouTube">🎬</a>
+                        <a href="#" title="TikTok">🎵</a>
+                        <a href="#" title="Tidal">🎧</a>
+                        <a href="#" title="Houzz">🏠</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 HIGH SCORE HUNT. Alle Rechte vorbehalten.</p>
+                <p>Veranstaltet von Parzival VR & Die Zockstube VR</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="assets/js/main.js">
+        
+    </script>
+</body>
+</html>
