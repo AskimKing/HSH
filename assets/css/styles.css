@@ -430,8 +430,8 @@ nav, section, footer {
     z-index: 10;
 }
 
-.key-orbit-1 { animation-delay: 0s; }
-.key-orbit-2 { animation-delay: -3.33s; }
+.key-orbit-1 { animation-delay: -3.33s; }
+.key-orbit-2 { animation-delay: 0s; }
 .key-orbit-3 { animation-delay: -6.67s; }
 
 .key-icon {
@@ -439,8 +439,8 @@ nav, section, footer {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 128px;
-    height: 128px;
+    width: 147px;
+    height: 147px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8));
     animation: keyFloatAndRotate 3s ease-in-out infinite;
@@ -449,7 +449,7 @@ nav, section, footer {
 
 .key-orbit-1 .key-icon { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); animation-delay: 0s; }
 .key-orbit-2 .key-icon { filter: drop-shadow(0 0 20px rgba(192, 192, 192, 0.8)); animation-delay: -1s; }
-.key-orbit-3 .key-icon { filter: drop-shadow(0 0 20px rgba(205, 127, 50, 0.8)); animation-delay: -2s; width: 90px; height: 90px; }
+.key-orbit-3 .key-icon { filter: drop-shadow(0 0 20px rgba(205, 127, 50, 0.8)); animation-delay: -2s; }
 
 /* ─── Section Shared ──────────────────────────────────────────────────────── */
 
@@ -1352,8 +1352,8 @@ body.matrix-mode { filter: hue-rotate(90deg); }
     }
 
     /* Golden key at top (0deg), silver left, bronze right */
-    .key-orbit-1 { animation-delay: 0s; }
-    .key-orbit-2 { animation-delay: -3.33s; }
+    .key-orbit-1 { animation-delay: -3.33s; }
+    .key-orbit-2 { animation-delay: 0s; }
     .key-orbit-3 { animation-delay: -6.67s; }
 
     /* Nav: center logo, hide links */
