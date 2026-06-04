@@ -42,6 +42,7 @@ body {
     position: relative;
 }
 
+
 /* Interactive Background */
 body::before {
     content: '';
@@ -1334,22 +1335,22 @@ body.matrix-mode { filter: hue-rotate(90deg); }
         height: 100% !important;
     }
 
-    /* Orbit ring: 80% of container so keys sit near the edge */
+    /* Orbit ring: 88% of container (+10%) */
     .key-orbit {
-        width: 80% !important;
-        height: 80% !important;
-        margin: -40% 0 0 -40% !important;
+        width: 88% !important;
+        height: 88% !important;
+        margin: -44% 0 0 -44% !important;
     }
 
-    /* Keys sized relative to the orbit ring */
+    /* Keys sized relative to the orbit ring (+15%) */
     .key-icon {
-        width: 30% !important;
-        height: 30% !important;
+        width: 34.5% !important;
+        height: 34.5% !important;
     }
 
     .key-orbit-3 .key-icon {
-        width: 30% !important;
-        height: 30% !important;
+        width: 34.5% !important;
+        height: 34.5% !important;
     }
 
     /* Golden key at top (0deg), silver left, bronze right */

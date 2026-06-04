@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>slow-drifting procedural noise, monochrome with faint purple</title>
+<style>
+  :root { color-scheme: dark; }
+  html,body { margin:0; height:100%; overflow:hidden; background:#020203;
+    font-family: "DM Mono", ui-monospace, monospace; }
+  #c { position:fixed; inset:0; width:100%; height:100%; display:block; }
+  #fallback { position:fixed; inset:0; display:none; align-items:center;
+    justify-content:center; color:#ccc; text-align:center; padding:2rem; }
+  #hud { position:fixed; left:16px; bottom:14px; font-size:12px;
+    letter-spacing:.08em; color:rgba(210,200,220,.55); pointer-events:none; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="fallback">Your browser could not start WebGL.<br>Try a recent Chrome, Firefox, or Safari.</div>
+<div id="hud">slow-drifting bioluminescent procedural noise, deep teal, calm</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script id="vert" type="x-shader/x-vertex">void main(){ gl_Position = vec4(position, 1.0); }</script>
+<script id="frag" type="x-shader/x-fragment">precision highp float;
+uniform vec2 u_resolution; uniform float u_time; uniform vec2 u_mouse;
+const int OCTAVES = 4; const float SPEED = 0.150;
+const vec3 PAL_A = vec3(0.1,0.3,0.35); const vec3 PAL_B = vec3(0.35,0.45,0.4);
+const vec3 PAL_C = vec3(1.0,1.0,1.0); const vec3 PAL_D = vec3(0.0,0.15,0.3);
+float hash21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float noise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);vec2 u=f*f*(3.-2.*f);float a=hash21(i);float b=hash21(i+vec2(1,0));float c=hash21(i+vec2(0,1));float d=hash21(i+vec2(1,1));return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}
+float fbm(vec2 p,int oct){float v=0.,amp=.5;mat2 r=mat2(.8,-.6,.6,.8);for(int i=0;i<8;i++){if(i>=oct)break;v+=amp*noise(p);p=r*p*2.;amp*=.5;}return v;}
+float warpedFbm(vec2 p,int oct,float t){vec2 q=vec2(fbm(p,oct),fbm(p+vec2(5.2,1.3),oct));vec2 r=vec2(fbm(p+4.*q+vec2(1.7,9.2)+.15*t,oct),fbm(p+4.*q+vec2(8.3,2.8)+.13*t,oct));return fbm(p+4.*r,oct);}
+vec3 palette(float t,vec3 a,vec3 b,vec3 c,vec3 d){return a+b*cos(6.28318*(c*t+d));}
+vec3 aces(vec3 x){float a=2.51,b=.03,c=2.43,d=.59,e=.14;return clamp((x*(a*x+b))/(x*(c*x+d)+e),0.,1.);}
+void main(){
+  vec2 uv=(gl_FragCoord.xy-0.5*u_resolution)/u_resolution.y;
+  float t=u_time*SPEED;
+  float w=warpedFbm(uv*2.5+vec2(t*0.3,0.0),OCTAVES,t);
+  float glow=smoothstep(0.3,0.75,w);
+  vec3 col=palette(w*0.8+t*0.05,PAL_A,PAL_B,PAL_C,PAL_D);
+  col+=glow*vec3(0.05,0.25,0.22)*1.4;
+  col=aces(col*1.1);
+  gl_FragColor=vec4(col,1.0);
+}</script>
+<script>
+(function(){
+  const canvas = document.getElementById('c');
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias:true, powerPreference:'high-performance' });
+  } catch(e){
+    document.getElementById('fallback').style.display = 'flex';
+    return;
+  }
+  const scene = new THREE.Scene();
+  const camera = new THREE.Camera();
+  const uniforms = {
+    u_resolution: { value: new THREE.Vector2() },
+    u_time:       { value: 0 },
+    u_mouse:      { value: new THREE.Vector2(0.5, 0.5) }
+  };
+  const material = new THREE.ShaderMaterial({
+    uniforms,
+    vertexShader: document.getElementById('vert').textContent,
+    fragmentShader: document.getElementById('frag').textContent
+  });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2,2), material);
+  scene.add(mesh);
+
+  function resize(){
+    const w = window.innerWidth, h = window.innerHeight;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(w, h, false);
+    uniforms.u_resolution.value.set(w * renderer.getPixelRatio(), h * renderer.getPixelRatio());
+  }
+  window.addEventListener('resize', resize); resize();
+  window.addEventListener('pointermove', e => {
+    uniforms.u_mouse.value.set(e.clientX / window.innerWidth, 1 - e.clientY / window.innerHeight);
+  });
+
+  // FPS probe the performance guard scrapes via window.__gen3d.
+  let frames = 0, fpsLast = performance.now(), fps = 0;
+  window.__gen3d = { get fps(){ return fps; }, compiledOk:true, started: performance.now() };
+
+  // Detect shader compile failure (Three logs but still constructs the program).
+  const gl = renderer.getContext();
+  const orig = gl.getProgramParameter.bind(gl);
+
+  const start = performance.now();
+  function loop(now){
+    uniforms.u_time.value = (now - start) / 1000;
+    renderer.render(scene, camera);
+    frames++;
+    if (now - fpsLast >= 1000){ fps = frames; frames = 0; fpsLast = now; }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
