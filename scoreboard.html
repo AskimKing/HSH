@@ -71,6 +71,89 @@
             margin-bottom: 60px;
         }
 
+        /* ── Arena Filter Buttons ───────────────────────────────────────── */
+        .sb-filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 36px;
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .sb-filter-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 10px 20px;
+            background: rgba(2, 8, 18, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 2px;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sb-filter-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,212,255,0.08), transparent);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .sb-filter-btn:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.12);
+        }
+
+        .sb-filter-btn:hover::before { opacity: 1; }
+
+        .sb-filter-btn.active {
+            border-color: rgba(0, 212, 255, 0.8);
+            color: #00d4ff;
+            box-shadow: 0 0 0 1px rgba(0,212,255,0.15), 0 0 24px rgba(0,212,255,0.2);
+            text-shadow: 0 0 10px rgba(0,212,255,0.6);
+        }
+
+        .sb-filter-btn.active::before { opacity: 1; }
+
+        .sb-filter-btn .btn-arena { font-size: 12px; font-weight: 700; }
+        .sb-filter-btn .btn-town  { font-size: 9px; font-weight: 400; letter-spacing: 2px; color: rgba(0,212,255,0.45); }
+        .sb-filter-btn.active .btn-town { color: rgba(0,212,255,0.7); }
+
+        /* Active indicator bar at bottom of button */
+        .sb-filter-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: rgba(0,212,255,0.8);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+
+        .sb-filter-btn.active::after { transform: scaleX(1); }
+
+        /* ── Current arena label ────────────────────────────────────────── */
+        .sb-arena-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(0,212,255,0.5);
+        }
+
         /* ── Perspective wrapper ────────────────────────────────────────── */
         .sb-perspective {
             perspective: 1600px;
@@ -423,6 +506,9 @@
         <h1 class="sb-title">SCOREBOARD</h1>
         <p class="sb-subtitle">Live Rankings · Wird täglich aktualisiert</p>
 
+        <!-- Arena filter buttons -->
+        <div class="sb-filter-row" id="sbFilterRow"></div>
+
         <div class="sb-perspective" id="sbPerspective">
             <div class="sb-panel" id="sbPanel">
 
@@ -434,7 +520,7 @@
 
                 <!-- top bar -->
                 <div class="sb-topbar">
-                    <span class="sb-topbar-left">HSH · 2026 · Season 1</span>
+                    <span class="sb-topbar-left">HSH · 2026 · <span id="sbArenaLabel">7th Space · Düsseldorf</span></span>
                     <div class="sb-live-badge">
                         <div class="sb-live-dot"></div>
                         Live
@@ -567,18 +653,104 @@
         draw();
     })();
 
+    // ── Arena definitions ────────────────────────────────────────────────────
+    const ARENAS = [
+        { key: '7th Space',      label: '7th Space',    town: 'Düsseldorf' },
+        { key: 'Zero Latency',   label: 'Zero Latency', town: 'Dortmund'   },
+        { key: 'Virtual Area',   label: 'Virtual Area', town: 'Aachen'     },
+        { key: 'MacFlay',        label: 'MacFlay',      town: 'Koblenz'    },
+        { key: 'VR Parks Unna',  label: 'VR Parks',     town: 'Unna'       },
+        { key: 'VR Arena',       label: 'VR Arena',     town: 'Troisdorf'  },
+    ];
+
+    let activeArena = '7th Space';
+
+    function buildFilterButtons() {
+        const row = document.getElementById('sbFilterRow');
+        ARENAS.forEach(a => {
+            const btn = document.createElement('button');
+            btn.className = 'sb-filter-btn' + (a.key === '7th Space' ? ' active' : '');
+            btn.dataset.arena = a.key;
+            btn.innerHTML = `<span class="btn-arena">${a.label}</span><span class="btn-town">${a.town}</span>`;
+            btn.addEventListener('click', () => {
+                activeArena = a.key;
+                document.querySelectorAll('.sb-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('sbArenaLabel').textContent = `${a.label} · ${a.town}`;
+                renderRows();
+            });
+            row.appendChild(btn);
+        });
+    }
+
     // ── Scoreboard Data & Rendering ──────────────────────────────────────────
     const PLAYERS = [
-        { name: 'Player',  arena: '7th Space',     town: 'Düsseldorf', score: 1847230, key: 'gold'     },
-        { name: 'Player',  arena: 'Zero Latency',  town: 'Dortmund',   score: 1623450, key: 'silver'   },
-        { name: 'Player',  arena: 'Virtual Area',  town: 'Aachen',     score: 1445820, key: 'bronze'   },
-        { name: 'Player',  arena: 'MacFlay',       town: 'Koblenz',    score: 1234560, key: 'wildcard' },
-        { name: 'Player',  arena: 'VR Parks Unna', town: 'Unna',       score: 1098320, key: 'wildcard' },
-        { name: 'Player',  arena: '7th Space',     town: 'Düsseldorf', score:  987650, key: 'wildcard' },
-        { name: 'Player',  arena: 'Zero Latency',  town: 'Dortmund',   score:  876230, key: 'wildcard' },
-        { name: 'Player',  arena: 'VR Arena',      town: 'Troisdorf',  score:  765440, key: 'wildcard' },
-        { name: 'Player',  arena: 'MacFlay',       town: 'Koblenz',    score:  643210, key: 'wildcard' },
-        { name: 'Player',  arena: 'VR Parks Unna', town: 'Unna',       score:  521890, key: 'wildcard' },
+        // ── 7th Space · Düsseldorf ──
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 1847230, key: 'gold'     },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 1623450, key: 'silver'   },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 1445820, key: 'bronze'   },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 1234560, key: 'wildcard' },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 1098320, key: 'wildcard' },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score:  987650, key: 'wildcard' },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score:  876230, key: 'wildcard' },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score:  765440, key: 'wildcard' },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score:  643210, key: 'wildcard' },
+        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score:  521890, key: 'wildcard' },
+        // ── Zero Latency · Dortmund ──
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score: 1792340, key: 'gold'     },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score: 1587620, key: 'silver'   },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score: 1412980, key: 'bronze'   },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score: 1198450, key: 'wildcard' },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score: 1054320, key: 'wildcard' },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score:  943870, key: 'wildcard' },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score:  832150, key: 'wildcard' },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score:  721430, key: 'wildcard' },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score:  612780, key: 'wildcard' },
+        { name: 'Player', arena: 'Zero Latency',  town: 'Dortmund',   score:  498340, key: 'wildcard' },
+        // ── Virtual Area · Aachen ──
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 1765430, key: 'gold'     },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 1543210, key: 'silver'   },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 1389760, key: 'bronze'   },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 1176530, key: 'wildcard' },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 1032890, key: 'wildcard' },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score:  921340, key: 'wildcard' },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score:  812670, key: 'wildcard' },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score:  703450, key: 'wildcard' },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score:  594320, key: 'wildcard' },
+        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score:  481230, key: 'wildcard' },
+        // ── MacFlay · Koblenz ──
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 1734560, key: 'gold'     },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 1521340, key: 'silver'   },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 1356780, key: 'bronze'   },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 1143210, key: 'wildcard' },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 1009870, key: 'wildcard' },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score:  897650, key: 'wildcard' },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score:  783420, key: 'wildcard' },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score:  672310, key: 'wildcard' },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score:  561890, key: 'wildcard' },
+        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score:  452340, key: 'wildcard' },
+        // ── VR Parks Unna · Unna ──
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score: 1698430, key: 'gold'     },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score: 1487650, key: 'silver'   },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score: 1323780, key: 'bronze'   },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score: 1112340, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score:  987120, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score:  874390, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score:  762150, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score:  651870, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score:  543210, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Parks Unna', town: 'Unna',       score:  432780, key: 'wildcard' },
+        // ── VR Arena · Troisdorf ──
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score: 1654320, key: 'gold'     },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score: 1443210, key: 'silver'   },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score: 1287650, key: 'bronze'   },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score: 1076430, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score:  954320, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score:  843210, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score:  732980, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score:  621450, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score:  512870, key: 'wildcard' },
+        { name: 'Player', arena: 'VR Arena',      town: 'Troisdorf',  score:  403560, key: 'wildcard' },
     ];
 
     const KEY_IMGS = {
@@ -593,21 +765,29 @@
         return n.toLocaleString('de-DE');
     }
 
-    function buildRows() {
+    function renderRows() {
         const container = document.getElementById('sbRows');
+        container.innerHTML = '';
 
-        PLAYERS.forEach((p, i) => {
+        const filtered = activeArena === 'all'
+            ? PLAYERS
+            : PLAYERS.filter(p => p.arena === activeArena);
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div style="padding:40px;text-align:center;color:rgba(0,212,255,0.35);letter-spacing:3px;font-size:12px;text-transform:uppercase;">Noch keine Einträge</div>`;
+            return;
+        }
+
+        filtered.forEach((p, i) => {
             const rank      = i + 1;
             const rankClass = RANK_CLASS[i] || '';
-            const delay     = 0.1 + i * 0.07;
+            const delay     = 0.05 + i * 0.06;
 
-            // Rank cell content
             let rankInner = `<span class="sb-rank-num">${rank}</span>`;
             if (p.key !== 'wildcard') {
                 rankInner += `<img class="sb-key-img" src="${KEY_IMGS[p.key]}" alt="${p.key} key">`;
             }
 
-            // Badge
             const badgeLabel = p.key === 'wildcard' ? 'Wildcard'
                              : p.key === 'gold'     ? 'Gold Key'
                              : p.key === 'silver'   ? 'Silver Key'
@@ -616,7 +796,6 @@
             const row = document.createElement('div');
             row.className = `sb-row ${rankClass}`;
             row.style.animationDelay = `${delay}s`;
-            row.dataset.score = p.score;
 
             row.innerHTML = `
                 <div class="sb-rank-cell">${rankInner}</div>
@@ -633,6 +812,8 @@
 
             container.appendChild(row);
         });
+
+        animateScores();
     }
 
     // Count-up animation for scores
@@ -688,8 +869,8 @@
     })();
 
     // ── Init ──────────────────────────────────────────────────────────────────
-    buildRows();
-    animateScores();
+    buildFilterButtons();
+    renderRows();
     setTimestamp();
     </script>
 </body>

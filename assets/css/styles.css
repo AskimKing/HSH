@@ -1128,6 +1128,8 @@ nav, section, footer {
 
 .placeholder-image { width: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 600; }
 
+.mobile-break { display: none; }
+
 /* ─── Animations ──────────────────────────────────────────────────────────── */
 
 @keyframes orbitRotate {
@@ -1358,6 +1360,11 @@ nav, section, footer {
     /* Hide desktop-only line breaks */
     .desktop-break {
         display: none;
+    }
+
+    /* Show mobile-only line breaks */
+    .mobile-break {
+        display: inline;
     }
 
     /* Sponsors: single column on mobile */
