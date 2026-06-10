@@ -321,9 +321,22 @@
 
         /* ── Arena cell ─────────────────────────────────────────────────── */
         .sb-arena-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .sb-arena-name {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.35);
+            color: rgba(255, 255, 255, 0.45);
             letter-spacing: 0.5px;
+        }
+
+        .sb-arena-town {
+            font-size: 10px;
+            color: rgba(0, 212, 255, 0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* ── Score cell ─────────────────────────────────────────────────── */
@@ -556,16 +569,16 @@
 
     // ── Scoreboard Data & Rendering ──────────────────────────────────────────
     const PLAYERS = [
-        { name: 'Player',  arena: '7th Space',     score: 1847230, key: 'gold'     },
-        { name: 'Player',  arena: 'Zero Latency',  score: 1623450, key: 'silver'   },
-        { name: 'Player',  arena: 'Virtual Area',  score: 1445820, key: 'bronze'   },
-        { name: 'Player',  arena: 'MacFlay',        score: 1234560, key: 'wildcard' },
-        { name: 'Player',  arena: 'VR Parks Unna', score: 1098320, key: 'wildcard' },
-        { name: 'Player',  arena: '7th Space',     score:  987650, key: 'wildcard' },
-        { name: 'Player',  arena: 'Zero Latency',  score:  876230, key: 'wildcard' },
-        { name: 'Player',  arena: 'VR Arena',      score:  765440, key: 'wildcard' },
-        { name: 'Player',  arena: 'MacFlay',        score:  643210, key: 'wildcard' },
-        { name: 'Player',  arena: 'VR Parks Unna', score:  521890, key: 'wildcard' },
+        { name: 'Player',  arena: '7th Space',     town: 'Düsseldorf', score: 1847230, key: 'gold'     },
+        { name: 'Player',  arena: 'Zero Latency',  town: 'Dortmund',   score: 1623450, key: 'silver'   },
+        { name: 'Player',  arena: 'Virtual Area',  town: 'Aachen',     score: 1445820, key: 'bronze'   },
+        { name: 'Player',  arena: 'MacFlay',       town: 'Koblenz',    score: 1234560, key: 'wildcard' },
+        { name: 'Player',  arena: 'VR Parks Unna', town: 'Unna',       score: 1098320, key: 'wildcard' },
+        { name: 'Player',  arena: '7th Space',     town: 'Düsseldorf', score:  987650, key: 'wildcard' },
+        { name: 'Player',  arena: 'Zero Latency',  town: 'Dortmund',   score:  876230, key: 'wildcard' },
+        { name: 'Player',  arena: 'VR Arena',      town: 'Troisdorf',  score:  765440, key: 'wildcard' },
+        { name: 'Player',  arena: 'MacFlay',       town: 'Koblenz',    score:  643210, key: 'wildcard' },
+        { name: 'Player',  arena: 'VR Parks Unna', town: 'Unna',       score:  521890, key: 'wildcard' },
     ];
 
     const KEY_IMGS = {
@@ -611,7 +624,10 @@
                     <span class="sb-player-name">${p.name}</span>
                     <span class="sb-badge badge-${p.key}">${badgeLabel}</span>
                 </div>
-                <div class="sb-arena-cell">${p.arena}</div>
+                <div class="sb-arena-cell">
+                    <span class="sb-arena-name">${p.arena}</span>
+                    <span class="sb-arena-town">${p.town}</span>
+                </div>
                 <div class="sb-score-cell" data-target="${p.score}">0</div>
             `;
 
