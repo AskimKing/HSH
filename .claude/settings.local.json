@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(find \"c:\\\\Projects\" -name \"*frame*\" 2>/dev/null | head -20)",
-      "Read(//c/Projects/**)"
+      "Read(//c/Projects/**)",
+      "Bash(git fetch *)"
     ]
   }
 }
