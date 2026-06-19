@@ -492,7 +492,7 @@
             <div class="nav-links">
                 <a href="index.html#tournament">Das Turnier</a>
                 <a href="index.html#locations">Arenen</a>
-                <a href="index.html#organizers">Veranstalter</a>
+                <a href="index.html#organizers">Organisatoren</a>
                 <a href="index.html#sponsors">Partner</a>
                 <a href="index.html#rules">Regeln</a>
             </div>
@@ -671,7 +671,7 @@
             const btn = document.createElement('button');
             btn.className = 'sb-filter-btn' + (a.key === '7th Space' ? ' active' : '');
             btn.dataset.arena = a.key;
-            btn.innerHTML = `<span class="btn-arena">${a.label}</span><span class="btn-town">${a.town}</span>`;
+            btn.innerHTML = `<span class="btn-arena" translate="no">${a.label}</span><span class="btn-town" translate="no">${a.town}</span>`;
             btn.addEventListener('click', () => {
                 activeArena = a.key;
                 document.querySelectorAll('.sb-filter-btn').forEach(b => b.classList.remove('active'));
@@ -803,7 +803,7 @@
                     <span class="sb-player-name">${p.name}</span>
                     <span class="sb-badge badge-${p.key}">${badgeLabel}</span>
                 </div>
-                <div class="sb-arena-cell">
+                <div class="sb-arena-cell" translate="no">
                     <span class="sb-arena-name">${p.arena}</span>
                     <span class="sb-arena-town">${p.town}</span>
                 </div>
