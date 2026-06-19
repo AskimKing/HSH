@@ -58,6 +58,20 @@
                 <a href="#sponsors">Partner</a>
                 <a href="#rules">Regeln</a>
             </div>
+            <!-- Mobile Hamburger Button -->
+            <button class="nav-hamburger" id="navHamburger" aria-label="Menü öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div class="nav-mobile-dropdown" id="navMobileDropdown">
+            <a href="#tournament" class="nav-mobile-link">Das Turnier</a>
+            <a href="#locations" class="nav-mobile-link">Arenen</a>
+            <a href="#organizers" class="nav-mobile-link">Organisatoren</a>
+            <a href="#sponsors" class="nav-mobile-link">Partner</a>
+            <a href="#rules" class="nav-mobile-link">Regeln</a>
         </div>
     </nav>
 
@@ -396,5 +410,31 @@
 
 
     <script src="assets/js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('navHamburger');
+        const dropdown  = document.getElementById('navMobileDropdown');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            dropdown.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-mobile-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                hamburger.classList.remove('open');
+                dropdown.classList.remove('open');
+
+                const targetId = link.getAttribute('href');
+                const section = document.querySelector(targetId);
+                if (section) {
+                    const navbar = document.querySelector('.navbar');
+                    const navHeight = navbar ? navbar.offsetHeight : 80;
+                    const top = section.getBoundingClientRect().top + window.scrollY - navHeight;
+                    window.scrollTo({ top, behavior: 'instant' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
