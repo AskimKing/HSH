@@ -36,7 +36,10 @@
         <!-- Cookie Banner --->
 <div class="cookie-banner" id="cookieBanner" style="text-align: center; margin-bottom: 50px;">
     <p>We use cookies to improve your experience. By using our site, you agree to our<a href="cookie.html"> cookie policy. </a></p>
-    <button onclick="acceptCookies()">Accept</button>
+    <div class="cookie-banner-buttons">
+        <button class="cookie-decline" onclick="declineCookies()">Decline</button>
+        <button onclick="acceptCookies()">Accept</button>
+    </div>
 </div>
 
     <!-- Particle Network Canvas with Perlin Noise -->

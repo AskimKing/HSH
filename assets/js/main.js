@@ -33,6 +33,11 @@ function acceptCookies() {
     localStorage.setItem('cookiesAccepted', 'true');
 }
 
+function declineCookies() {
+    document.getElementById('cookieBanner').style.display = 'none';
+    localStorage.setItem('cookiesAccepted', 'false');
+}
+
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
     if (localStorage.getItem('cookiesAccepted') === 'true') {
