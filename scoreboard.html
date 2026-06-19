@@ -341,14 +341,17 @@
         .sb-rank-cell {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            flex-wrap: nowrap;
+            overflow: visible;
         }
 
         .sb-rank-num {
             font-size: 22px;
             font-weight: 900;
-            min-width: 30px;
+            min-width: 24px;
             line-height: 1;
+            flex-shrink: 0;
         }
 
         .rank-1 .sb-rank-num { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.7), 0 0 40px rgba(255,215,0,0.3); }
@@ -364,6 +367,13 @@
             height: 22px;
             object-fit: contain;
             filter: drop-shadow(0 0 6px currentColor);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            .sb-rank-num { font-size: 18px; min-width: 18px; }
+            .sb-key-img  { width: 16px; height: 16px; }
+            .sb-rank-cell { gap: 4px; }
         }
 
         /* ── Player cell ────────────────────────────────────────────────── */
