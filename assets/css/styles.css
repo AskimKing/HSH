@@ -1318,6 +1318,7 @@ nav, section, footer {
         max-height: 320px;
         margin: 0 auto 24px;
         flex-shrink: 0;
+        overflow: hidden;
     }
 
     /* Center logo: 70% of the container */
