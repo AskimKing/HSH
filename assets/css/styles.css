@@ -221,7 +221,7 @@ nav, section, footer {
         display: flex;
         flex-direction: column;
         background: rgba(0, 0, 0, 0.97);
-        border-top: 1px solid rgba(0, 212, 255, 0.2);
+        border-top: none;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.35s ease, padding 0.35s ease;
@@ -231,6 +231,7 @@ nav, section, footer {
     .nav-mobile-dropdown.open {
         max-height: 400px;
         padding: 16px 20px;
+        border-top: 1px solid rgba(0, 212, 255, 0.2);
     }
 
     .nav-mobile-link {
