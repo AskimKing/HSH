@@ -1459,6 +1459,11 @@ nav, section, footer {
         margin-bottom: 10px;
     }
 
+    /* Sponsors: reduced top spacing on mobile */
+    #sponsors {
+        padding-top: 20px;
+    }
+
     /* Rules */
     .rule-card {
         padding: 24px 16px;
