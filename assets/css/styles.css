@@ -1531,4 +1531,13 @@ nav, section, footer {
         grid-template-columns: 1fr !important;
         gap: 20px !important;
     }
+
+    /* Reset centered last-cards to full width on mobile */
+    .attendee-grid .attendee-card:last-child {
+        grid-column: 1 !important;
+    }
+
+    .sponsor-grid-inner .sponsor-logo:last-child {
+        grid-column: 1 !important;
+    }
 }
