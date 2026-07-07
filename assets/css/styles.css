@@ -1511,6 +1511,34 @@ nav, section, footer {
         padding: 50px 0 !important;
     }
 
+    /* Rules hero: less top padding on mobile */
+    .rules-hero {
+        padding: 80px 20px 50px !important;
+    }
+
+    /* Rules contact card: compact on mobile */
+    .rules-contact {
+        margin-top: 40px !important;
+        padding: 30px 20px !important;
+    }
+
+    .rules-contact h3 {
+        font-size: 1.4rem !important;
+    }
+
+    .rules-contact p {
+        font-size: 1rem !important;
+    }
+
+    .rules-contact div[style] {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    .rules-contact span {
+        display: none !important;
+    }
+
     /* Lists inside rule cards and cookie/impressum pages */
     ul {
         margin-left: 16px !important;
