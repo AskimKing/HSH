@@ -6,7 +6,8 @@
       "Bash(git fetch *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "PowerShell(Copy-Item \"c:\\\\Projects\\\\HSH-main\\\\assets\\\\HSH Logos\\\\HSH Logo - NEU.png\" \"c:\\\\Projects\\\\HSH-main\\\\favicon.png\")"
     ]
   }
 }
