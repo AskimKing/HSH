@@ -954,6 +954,19 @@ nav, section, footer {
     grid-template-columns: 1fr 1fr;
 }
 
+.organizers-grid a img {
+    transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+.organizers-grid a:hover img {
+    filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.7)) drop-shadow(0 0 24px rgba(0, 212, 255, 0.35)) brightness(1.1);
+    transform: scale(1.04);
+}
+
+.organizers-grid div:nth-child(2) a:hover img {
+    filter: drop-shadow(0 0 12px rgba(255, 0, 128, 0.7)) drop-shadow(0 0 24px rgba(255, 0, 128, 0.35)) brightness(1.1);
+}
+
 /* ─── HSH Sections ────────────────────────────────────────────────────────── */
 
 .hsh-intro { padding: 100px 0; background: var(--bg-dark); }
