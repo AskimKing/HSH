@@ -4,7 +4,9 @@
       "Bash(find \"c:\\\\Projects\" -name \"*frame*\" 2>/dev/null | head -20)",
       "Read(//c/Projects/**)",
       "Bash(git fetch *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
