@@ -1623,4 +1623,8 @@ nav, section, footer {
     .sponsor-grid-inner .sponsor-logo:last-child {
         grid-column: 1 !important;
     }
+
+    .rules-grid .rules-card:last-child {
+        grid-column: 1 !important;
+    }
 }
