@@ -686,6 +686,22 @@ nav, section, footer {
     box-shadow: 0 15px 50px rgba(255, 0, 128, 0.3);
 }
 
+@keyframes wildcard-pulse {
+    0%, 100% {
+        border-color: rgba(255, 0, 128, 0.55);
+        box-shadow: 0 0 12px rgba(255, 0, 128, 0.25), 0 0 28px rgba(255, 0, 128, 0.1);
+    }
+    50% {
+        border-color: rgba(255, 0, 128, 0.2);
+        box-shadow: 0 0 4px rgba(255, 0, 128, 0.08);
+    }
+}
+
+.wildcard-card {
+    border-color: rgba(255, 0, 128, 0.55);
+    animation: wildcard-pulse 2.8s ease-in-out infinite;
+}
+
 .game-image {
     height: 200px;
     background: var(--gradient-accent);
