@@ -377,13 +377,21 @@
             }
         }
 
-        async function incrementSpotsCount() {
+        async function incrementSpotsCount(attempt = 1) {
             try {
-                const response = await fetch(`https://abacus.jasoncameron.dev/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
+                const response = await fetch(`https://abacus.jasoncameron.dev/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`, {
+                    keepalive: true
+                });
                 const data = await response.json();
-                renderSpotsCount(data.value || 0);
+                if (typeof data.value !== 'number') {
+                    throw new Error('Ungültige Zähler-Antwort');
+                }
+                renderSpotsCount(data.value);
             } catch (err) {
-                // Zähler-Update fehlgeschlagen, Anmeldung ist davon nicht betroffen
+                if (attempt < 3) {
+                    setTimeout(() => incrementSpotsCount(attempt + 1), 1000 * attempt);
+                }
+                // Nach mehreren Versuchen fehlgeschlagen (z.B. durch Werbeblocker) – Anmeldung selbst ist davon nicht betroffen
             }
         }
 
