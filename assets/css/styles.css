@@ -583,6 +583,14 @@ nav, section, footer {
     box-shadow: 0 15px 50px rgba(0, 212, 255, 0.3);
 }
 
+.location-icon {
+    height: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
 .arena-logo {
     width: 120px;
     height: 120px;
