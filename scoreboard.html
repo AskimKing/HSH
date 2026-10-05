@@ -75,12 +75,22 @@
         /* ── Arena Filter Buttons ───────────────────────────────────────── */
         .sb-filter-row {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 10px;
             justify-content: center;
             margin-bottom: 36px;
             width: 100%;
-            max-width: 960px;
+            max-width: 1200px;
+            overflow-x: auto;
+            padding: 6px 2px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0,212,255,0.3) transparent;
+        }
+
+        .sb-filter-row .sb-filter-btn {
+            flex: 1 0 auto;
+            padding: 10px 14px;
+            white-space: nowrap;
         }
 
         .sb-filter-btn {
@@ -478,11 +488,49 @@
 
         /* ── Mobile ─────────────────────────────────────────────────────── */
         @media (max-width: 640px) {
+            .sb-section { padding: 40px 16px 60px; }
+
+            .sb-eyebrow  { font-size: 10px; letter-spacing: 4px; margin-bottom: 10px; }
+            .sb-title    { font-size: clamp(2rem, 11vw, 3rem); letter-spacing: 3px; }
+            .sb-subtitle { font-size: 10px; letter-spacing: 2px; margin-bottom: 28px; }
+
+            /* Arena buttons: one swipeable line, edge to edge */
+            .sb-filter-row {
+                justify-content: flex-start;
+                width: calc(100% + 32px);
+                margin: 0 -16px 20px;
+                padding: 6px 16px 10px;
+                gap: 8px;
+                scroll-snap-type: x proximity;
+                -webkit-overflow-scrolling: touch;
+            }
+            .sb-filter-row .sb-filter-btn {
+                flex: 0 0 auto;
+                padding: 10px 14px;
+                scroll-snap-align: center;
+            }
+
+            /* Flat panel – no 3D tilt on phones */
+            .sb-perspective { perspective: none; }
+            .sb-panel { transform: none !important; }
+            .sb-shadow { display: none; }
+
+            .sb-topbar { padding: 12px 14px; gap: 10px; }
+            .sb-topbar-left { font-size: 10px; letter-spacing: 2px; }
+            .sb-live-badge { font-size: 9px; letter-spacing: 2px; flex-shrink: 0; }
+
             .sb-col-header,
-            .sb-row { grid-template-columns: 48px 1fr 120px; }
+            .sb-row { grid-template-columns: 44px minmax(0, 1fr) auto; padding: 12px 14px; column-gap: 10px; }
+            .sb-col-header { padding: 8px 14px; }
+            .sb-col-label { font-size: 9px; letter-spacing: 2px; }
             .sb-arena-cell, .sb-col-label.col-arena { display: none; }
-            .sb-title { letter-spacing: 4px; }
-            .sb-score-cell { font-size: 14px; }
+
+            .sb-player-name { font-size: 14px; letter-spacing: 0.5px; overflow-wrap: anywhere; }
+            .sb-badge { font-size: 8px; letter-spacing: 1.5px; }
+            .sb-score-cell { font-size: 15px; letter-spacing: 0.5px; }
+
+            .sb-bottombar { flex-direction: column; align-items: flex-start; gap: 4px; padding: 12px 14px; }
+            .sb-bottombar-text { font-size: 9px; letter-spacing: 1px; }
         }
     </style>
 </head>
@@ -507,6 +555,20 @@
                 <a href="index.html#sponsors">Partner</a>
                 <a href="index.html#rules">Regeln</a>
             </div>
+            <!-- Mobile Hamburger Button -->
+            <button class="nav-hamburger" id="navHamburger" aria-label="Menü öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div class="nav-mobile-dropdown" id="navMobileDropdown">
+            <a href="index.html#tournament" class="nav-mobile-link">Das Turnier</a>
+            <a href="index.html#locations" class="nav-mobile-link">VR-Arenen</a>
+            <a href="index.html#organizers" class="nav-mobile-link">Organisatoren</a>
+            <a href="index.html#sponsors" class="nav-mobile-link">Partner</a>
+            <a href="index.html#rules" class="nav-mobile-link">Regeln</a>
         </div>
     </nav>
 
@@ -688,6 +750,7 @@
                 activeArena = a.key;
                 document.querySelectorAll('.sb-filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                 document.getElementById('sbArenaLabel').textContent = `${a.label} · ${a.town}`;
                 renderRows();
             });
@@ -889,6 +952,16 @@
             requestAnimationFrame(tick);
         }
         tick();
+    })();
+
+    // ── Mobile menu ──────────────────────────────────────────────────────────
+    (function () {
+        const hamburger = document.getElementById('navHamburger');
+        const dropdown  = document.getElementById('navMobileDropdown');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            dropdown.classList.toggle('open');
+        });
     })();
 
     // ── Init ──────────────────────────────────────────────────────────────────
