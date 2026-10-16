@@ -72,99 +72,6 @@
             margin-bottom: 60px;
         }
 
-        /* ── Arena Filter Buttons ───────────────────────────────────────── */
-        .sb-filter-row {
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 36px;
-            width: 100%;
-            max-width: 1200px;
-            overflow-x: auto;
-            padding: 6px 2px;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(0,212,255,0.3) transparent;
-        }
-
-        .sb-filter-row .sb-filter-btn {
-            flex: 1 0 auto;
-            padding: 10px 14px;
-            white-space: nowrap;
-        }
-
-        .sb-filter-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            padding: 10px 20px;
-            background: rgba(2, 8, 18, 0.8);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 2px;
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sb-filter-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0,212,255,0.08), transparent);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .sb-filter-btn:hover {
-            border-color: rgba(0, 212, 255, 0.5);
-            color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.12);
-        }
-
-        .sb-filter-btn:hover::before { opacity: 1; }
-
-        .sb-filter-btn.active {
-            border-color: rgba(0, 212, 255, 0.8);
-            color: #00d4ff;
-            box-shadow: 0 0 0 1px rgba(0,212,255,0.15), 0 0 24px rgba(0,212,255,0.2);
-            text-shadow: 0 0 10px rgba(0,212,255,0.6);
-        }
-
-        .sb-filter-btn.active::before { opacity: 1; }
-
-        .sb-filter-btn .btn-arena { font-size: 12px; font-weight: 700; }
-        .sb-filter-btn .btn-town  { font-size: 9px; font-weight: 400; letter-spacing: 2px; color: rgba(0,212,255,0.45); }
-        .sb-filter-btn.active .btn-town { color: rgba(0,212,255,0.7); }
-
-        /* Active indicator bar at bottom of button */
-        .sb-filter-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 2px;
-            background: rgba(0,212,255,0.8);
-            transform: scaleX(0);
-            transition: transform 0.2s ease;
-        }
-
-        .sb-filter-btn.active::after { transform: scaleX(1); }
-
-        /* ── Current arena label ────────────────────────────────────────── */
-        .sb-arena-label {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: rgba(0,212,255,0.5);
-        }
-
         /* ── Perspective wrapper ────────────────────────────────────────── */
         .sb-perspective {
             perspective: 1600px;
@@ -291,7 +198,7 @@
         /* ── Column headers ─────────────────────────────────────────────── */
         .sb-col-header {
             display: grid;
-            grid-template-columns: 64px 1fr 190px 160px;
+            grid-template-columns: 80px 1fr auto;
             padding: 10px 28px;
             border-bottom: 1px solid rgba(0, 212, 255, 0.2);
             background: rgba(0, 212, 255, 0.04);
@@ -310,9 +217,9 @@
         /* ── Data rows ──────────────────────────────────────────────────── */
         .sb-row {
             display: grid;
-            grid-template-columns: 64px 1fr 190px 160px;
+            grid-template-columns: 80px 1fr auto;
             align-items: center;
-            padding: 14px 28px;
+            padding: 22px 28px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             position: relative;
             transition: background 0.25s ease, box-shadow 0.25s ease;
@@ -358,7 +265,7 @@
         }
 
         .sb-rank-num {
-            font-size: 22px;
+            font-size: 30px;
             font-weight: 900;
             min-width: 24px;
             line-height: 1;
@@ -374,16 +281,16 @@
         }
 
         .sb-key-img {
-            width: 22px;
-            height: 22px;
+            width: 32px;
+            height: 32px;
             object-fit: contain;
             filter: drop-shadow(0 0 6px currentColor);
             flex-shrink: 0;
         }
 
         @media (max-width: 640px) {
-            .sb-rank-num { font-size: 18px; min-width: 18px; }
-            .sb-key-img  { width: 16px; height: 16px; }
+            .sb-rank-num { font-size: 22px; min-width: 18px; }
+            .sb-key-img  { width: 22px; height: 22px; }
             .sb-rank-cell { gap: 4px; }
         }
 
@@ -395,7 +302,7 @@
         }
 
         .sb-player-name {
-            font-size: 15px;
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: 1px;
             color: #fff;
@@ -421,43 +328,19 @@
         .badge-gold     { background: rgba(255,215,0,0.12); color: #ffd700; border: 1px solid rgba(255,215,0,0.35); }
         .badge-silver   { background: rgba(192,192,192,0.12); color: #c0c0c0; border: 1px solid rgba(192,192,192,0.3); }
         .badge-bronze   { background: rgba(205,127,50,0.12); color: #cd7f32; border: 1px solid rgba(205,127,50,0.3); }
-        .badge-wildcard { background: rgba(0,212,255,0.08); color: rgba(0,212,255,0.7); border: 1px solid rgba(0,212,255,0.25); }
 
-        /* ── Arena cell ─────────────────────────────────────────────────── */
-        .sb-arena-cell {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .sb-arena-name {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.45);
-            letter-spacing: 0.5px;
-        }
-
-        .sb-arena-town {
-            font-size: 10px;
-            color: rgba(0, 212, 255, 0.4);
-            letter-spacing: 1px;
+        /* ── Prize cell ─────────────────────────────────────────────────── */
+        .sb-prize-cell {
+            text-align: right;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        /* ── Score cell ─────────────────────────────────────────────────── */
-        .sb-score-cell {
-            text-align: right;
-            font-size: 17px;
-            font-weight: 900;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: 1px;
-        }
-
-        .rank-1 .sb-score-cell { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
-        .rank-2 .sb-score-cell { color: #c0c0c0; text-shadow: 0 0 12px rgba(192,192,192,0.4); }
-        .rank-3 .sb-score-cell { color: #cd7f32; }
-        .sb-row:not(.rank-1):not(.rank-2):not(.rank-3) .sb-score-cell {
-            color: rgba(0, 212, 255, 0.85);
-        }
+        .rank-1 .sb-prize-cell { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+        .rank-2 .sb-prize-cell { color: #c0c0c0; text-shadow: 0 0 12px rgba(192,192,192,0.4); }
+        .rank-3 .sb-prize-cell { color: #cd7f32; }
 
         /* ── Bottom bar ─────────────────────────────────────────────────── */
         .sb-bottombar {
@@ -494,22 +377,6 @@
             .sb-title    { font-size: clamp(2rem, 11vw, 3rem); letter-spacing: 3px; }
             .sb-subtitle { font-size: 10px; letter-spacing: 2px; margin-bottom: 28px; }
 
-            /* Arena buttons: one swipeable line, edge to edge */
-            .sb-filter-row {
-                justify-content: flex-start;
-                width: calc(100% + 32px);
-                margin: 0 -16px 20px;
-                padding: 6px 16px 10px;
-                gap: 8px;
-                scroll-snap-type: x proximity;
-                -webkit-overflow-scrolling: touch;
-            }
-            .sb-filter-row .sb-filter-btn {
-                flex: 0 0 auto;
-                padding: 10px 14px;
-                scroll-snap-align: center;
-            }
-
             /* Flat panel – no 3D tilt on phones */
             .sb-perspective { perspective: none; }
             .sb-panel { transform: none !important; }
@@ -520,14 +387,13 @@
             .sb-live-badge { font-size: 9px; letter-spacing: 2px; flex-shrink: 0; }
 
             .sb-col-header,
-            .sb-row { grid-template-columns: 44px minmax(0, 1fr) auto; padding: 12px 14px; column-gap: 10px; }
+            .sb-row { grid-template-columns: 56px minmax(0, 1fr) auto; padding: 16px 14px; column-gap: 10px; }
             .sb-col-header { padding: 8px 14px; }
             .sb-col-label { font-size: 9px; letter-spacing: 2px; }
-            .sb-arena-cell, .sb-col-label.col-arena { display: none; }
 
-            .sb-player-name { font-size: 14px; letter-spacing: 0.5px; overflow-wrap: anywhere; }
+            .sb-player-name { font-size: 16px; letter-spacing: 0.5px; overflow-wrap: anywhere; }
             .sb-badge { font-size: 8px; letter-spacing: 1.5px; }
-            .sb-score-cell { font-size: 15px; letter-spacing: 0.5px; }
+            .sb-prize-cell { font-size: 11px; letter-spacing: 1px; }
 
             .sb-bottombar { flex-direction: column; align-items: flex-start; gap: 4px; padding: 12px 14px; }
             .sb-bottombar-text { font-size: 9px; letter-spacing: 1px; }
@@ -575,12 +441,9 @@
     <!-- Scoreboard -->
     <section class="sb-section">
 
-        <div class="sb-eyebrow">High Score Hunt 2026 · Alle Arenen</div>
+        <div class="sb-eyebrow">High Score Hunt 2026 · Finale</div>
         <h1 class="sb-title">SCOREBOARD</h1>
-        <p class="sb-subtitle">Live Rankings · Wird täglich aktualisiert</p>
-
-        <!-- Arena filter buttons -->
-        <div class="sb-filter-row" id="sbFilterRow"></div>
+        <p class="sb-subtitle">Die Gewinner des Events</p>
 
         <div class="sb-perspective" id="sbPerspective">
             <div class="sb-panel" id="sbPanel">
@@ -593,19 +456,18 @@
 
                 <!-- top bar -->
                 <div class="sb-topbar">
-                    <span class="sb-topbar-left">HSH · 2026 · <span id="sbArenaLabel">7th Space · Düsseldorf</span></span>
+                    <span class="sb-topbar-left">HSH · 2026 · Gewinner</span>
                     <div class="sb-live-badge">
                         <div class="sb-live-dot"></div>
-                        Live
+                        Final
                     </div>
                 </div>
 
                 <!-- column labels -->
                 <div class="sb-col-header">
-                    <div class="sb-col-label">Rank</div>
+                    <div class="sb-col-label">Platz</div>
                     <div class="sb-col-label">Spieler</div>
-                    <div class="sb-col-label col-arena">Arena</div>
-                    <div class="sb-col-label right">Score</div>
+                    <div class="sb-col-label right">Preis</div>
                 </div>
 
                 <!-- rows injected by JS -->
@@ -613,8 +475,7 @@
 
                 <!-- bottom bar -->
                 <div class="sb-bottombar">
-                    <span class="sb-bottombar-text">Plätze 1–3 erhalten einen Schlüssel fürs Finale</span>
-                    <span class="sb-bottombar-text" id="sbTimestamp"></span>
+                    <span class="sb-bottombar-text">Herzlichen Glückwunsch an alle Gewinner!</span>
                 </div>
 
             </div>
@@ -726,117 +587,11 @@
         draw();
     })();
 
-    // ── Arena definitions ────────────────────────────────────────────────────
-    const ARENAS = [
-        { key: '7th Space',      label: '7th Space',    town: 'Düsseldorf' },
-        { key: 'Zero Latency',   label: 'Zero Latency', town: 'Dortmund'   },
-        { key: 'Virtual Area',   label: 'Virtual Area', town: 'Aachen'     },
-        { key: 'MacFlay',        label: 'MacFlay',      town: 'Koblenz'    },
-        { key: 'VR Parks Unna',  label: 'VR Parks',     town: 'Unna'       },
-        { key: 'Funderground',   label: 'Funderground', town: 'Troisdorf'  },
-        { key: 'Holocafé',       label: 'Holocafé',     town: 'Düsseldorf' },
-    ];
-
-    let activeArena = '7th Space';
-
-    function buildFilterButtons() {
-        const row = document.getElementById('sbFilterRow');
-        ARENAS.forEach(a => {
-            const btn = document.createElement('button');
-            btn.className = 'sb-filter-btn' + (a.key === '7th Space' ? ' active' : '');
-            btn.dataset.arena = a.key;
-            btn.innerHTML = `<span class="btn-arena" translate="no">${a.label}</span><span class="btn-town" translate="no">${a.town}</span>`;
-            btn.addEventListener('click', () => {
-                activeArena = a.key;
-                document.querySelectorAll('.sb-filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                document.getElementById('sbArenaLabel').textContent = `${a.label} · ${a.town}`;
-                renderRows();
-            });
-            row.appendChild(btn);
-        });
-    }
-
-    // ── Scoreboard Data & Rendering ──────────────────────────────────────────
-    const PLAYERS = [
-        // ── 7th Space · Düsseldorf ──
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'gold'     },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'silver'   },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'bronze'   },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: '7th Space',     town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        // ── Zero Latency · Dortmund ──
-        { name: 'Vlady',         arena: 'Zero Latency',  town: 'Dortmund',   score: 742926, key: 'gold'     },
-        { name: 'Janjau',        arena: 'Zero Latency',  town: 'Dortmund',   score: 403776, key: 'silver'   },
-        { name: 'Marlon HU.',    arena: 'Zero Latency',  town: 'Dortmund',   score: 388972, key: 'bronze'   },
-        { name: 'Wischiwaschi',  arena: 'Zero Latency',  town: 'Dortmund',   score: 362164, key: 'wildcard' },
-        { name: 'Leiem P.',      arena: 'Zero Latency',  town: 'Dortmund',   score: 354388, key: 'wildcard' },
-        { name: 'Yasinyo',       arena: 'Zero Latency',  town: 'Dortmund',   score: 349088, key: 'wildcard' },
-        { name: 'Sir Paffealot', arena: 'Zero Latency',  town: 'Dortmund',   score: 342798, key: 'wildcard' },
-        { name: 'Gerrit',        arena: 'Zero Latency',  town: 'Dortmund',   score: 324888, key: 'wildcard' },
-        { name: 'Lakes',         arena: 'Zero Latency',  town: 'Dortmund',   score: 324292, key: 'wildcard' },
-        { name: 'Julian1337.',   arena: 'Zero Latency',  town: 'Dortmund',   score: 308828, key: 'wildcard' },
-        // ── Virtual Area · Aachen ──
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'gold'     },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'silver'   },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'bronze'   },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Virtual Area',  town: 'Aachen',     score: 0, key: 'wildcard' },
-        // ── MacFlay · Koblenz ──
-        { name: 'WADIM',         arena: 'MacFlay', town: 'Koblenz',    score: 183950, key: 'gold'     },
-        { name: 'EL_Phantomos',  arena: 'MacFlay', town: 'Koblenz',    score: 182330, key: 'silver'   },
-        { name: 'Plutodruide',   arena: 'MacFlay', town: 'Koblenz',    score: 180720, key: 'bronze'   },
-        { name: 'Nela',          arena: 'MacFlay', town: 'Koblenz',    score: 133520, key: 'wildcard' },
-        { name: 'Speedygretel',  arena: 'MacFlay', town: 'Koblenz',    score: 98340,  key: 'wildcard' },
-        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'MacFlay',       town: 'Koblenz',    score: 0, key: 'wildcard' },
-        // ── VR Parks Unna · Unna ──
-        { name: 'FLEXOS',        arena: 'VR Parks Unna', town: 'Unna',  score: 70150, key: 'gold'     },
-        { name: 'GIESELA',       arena: 'VR Parks Unna', town: 'Unna',  score: 69520, key: 'silver'   },
-        { name: 'Ian Welson',    arena: 'VR Parks Unna', town: 'Unna',  score: 56560, key: 'bronze'   },
-        { name: 'Juan de Son',   arena: 'VR Parks Unna', town: 'Unna',  score: 54790, key: 'wildcard' },
-        { name: 'KEMALKLYCI74',  arena: 'VR Parks Unna', town: 'Unna',  score: 54040, key: 'wildcard' },
-        { name: 'Kalpsi232',     arena: 'VR Parks Unna', town: 'Unna',  score: 52690, key: 'wildcard' },
-        { name: 'Holgn',         arena: 'VR Parks Unna', town: 'Unna',  score: 50730, key: 'wildcard' },
-        { name: 'VITZKI',        arena: 'VR Parks Unna', town: 'Unna',  score: 50660, key: 'wildcard' },
-        { name: 'PHILIP.M',      arena: 'VR Parks Unna', town: 'Unna',  score: 46830, key: 'wildcard' },
-        { name: 'ILIASKH',       arena: 'VR Parks Unna', town: 'Unna',  score: 43630, key: 'wildcard' },
-        // ── Funderground · Troisdorf ──
-        { name: 'Stein',         arena: 'Funderground', town: 'Troisdorf',  score: 108530, key: 'gold'     },
-        { name: 'Bleam Wolf',    arena: 'Funderground', town: 'Troisdorf',  score: 107920, key: 'silver'   },
-        { name: 'RAVEN-666',     arena: 'Funderground', town: 'Troisdorf',  score: 105860, key: 'bronze'   },
-        { name: 'Nadiii',        arena: 'Funderground', town: 'Troisdorf',  score: 84170,  key: 'wildcard' },
-        { name: 'Timm 420',      arena: 'Funderground', town: 'Troisdorf',  score: 48430,  key: 'wildcard' },
-        { name: 'MELMELMELMEL',  arena: 'Funderground', town: 'Troisdorf',  score: 42716,  key: 'wildcard' },
-        { name: 'Player', arena: 'Funderground',      town: 'Troisdorf',  score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Funderground',      town: 'Troisdorf',  score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Funderground',      town: 'Troisdorf',  score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Funderground',      town: 'Troisdorf',  score: 0, key: 'wildcard' },
-        // ── Holocafé · Düsseldorf ──
-        { name: 'Dennis.D. 94', arena: 'Holocafé', town: 'Düsseldorf', score: 1078, key: 'gold'     },
-        { name: 'Cpt_Enrage',   arena: 'Holocafé', town: 'Düsseldorf', score: 930,  key: 'silver'   },
-        { name: 'pattu',        arena: 'Holocafé', town: 'Düsseldorf', score: 916,  key: 'bronze'   },
-        { name: 'onlyonehero',  arena: 'Holocafé', town: 'Düsseldorf', score: 880,  key: 'wildcard' },
-        { name: 'Player', arena: 'Holocafé',      town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Holocafé',      town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Holocafé',      town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Holocafé',      town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Holocafé',      town: 'Düsseldorf', score: 0, key: 'wildcard' },
-        { name: 'Player', arena: 'Holocafé',      town: 'Düsseldorf', score: 0, key: 'wildcard' },
+    // ── Event winners ────────────────────────────────────────────────────────
+    const WINNERS = [
+        { name: 'Vlady',      key: 'gold'   },
+        { name: 'Bleam Wolf', key: 'silver' },
+        { name: 'Ian Watson', key: 'bronze' },
     ];
 
     const KEY_IMGS = {
@@ -845,92 +600,37 @@
         bronze: 'assets/HSH Logos/Schlüssel Bronze.png',
     };
 
-    const RANK_CLASS = ['rank-1', 'rank-2', 'rank-3'];
+    const KEY_LABELS = {
+        gold:   'Goldschlüssel',
+        silver: 'Silberschlüssel',
+        bronze: 'Bronzeschlüssel',
+    };
 
-    function formatScore(n) {
-        return n.toLocaleString('de-DE');
-    }
+    const RANK_CLASS = ['rank-1', 'rank-2', 'rank-3'];
 
     function renderRows() {
         const container = document.getElementById('sbRows');
         container.innerHTML = '';
 
-        const filtered = activeArena === 'all'
-            ? PLAYERS
-            : PLAYERS.filter(p => p.arena === activeArena);
-
-        if (filtered.length === 0) {
-            container.innerHTML = `<div style="padding:40px;text-align:center;color:rgba(0,212,255,0.35);letter-spacing:3px;font-size:12px;text-transform:uppercase;">Noch keine Einträge</div>`;
-            return;
-        }
-
-        filtered.forEach((p, i) => {
-            const rank      = i + 1;
-            const rankClass = RANK_CLASS[i] || '';
-            const delay     = 0.05 + i * 0.06;
-
-            let rankInner = `<span class="sb-rank-num">${rank}</span>`;
-            if (p.key !== 'wildcard') {
-                rankInner += `<img class="sb-key-img" src="${KEY_IMGS[p.key]}" alt="${p.key} key">`;
-            }
-
-            const badgeLabel = p.key === 'wildcard' ? 'Wildcard'
-                             : p.key === 'gold'     ? 'Gold Key'
-                             : p.key === 'silver'   ? 'Silver Key'
-                             : 'Bronze Key';
-
+        WINNERS.forEach((p, i) => {
             const row = document.createElement('div');
-            row.className = `sb-row ${rankClass}`;
-            row.style.animationDelay = `${delay}s`;
+            row.className = `sb-row ${RANK_CLASS[i]}`;
+            row.style.animationDelay = `${0.05 + i * 0.12}s`;
 
             row.innerHTML = `
-                <div class="sb-rank-cell">${rankInner}</div>
+                <div class="sb-rank-cell">
+                    <span class="sb-rank-num">${i + 1}</span>
+                    <img class="sb-key-img" src="${KEY_IMGS[p.key]}" alt="${KEY_LABELS[p.key]}">
+                </div>
                 <div class="sb-player-cell">
-                    <span class="sb-player-name">${p.name}</span>
-                    <span class="sb-badge badge-${p.key}">${badgeLabel}</span>
+                    <span class="sb-player-name" translate="no">${p.name}</span>
+                    <span class="sb-badge badge-${p.key}">${i + 1}. Platz</span>
                 </div>
-                <div class="sb-arena-cell" translate="no">
-                    <span class="sb-arena-name">${p.arena}</span>
-                    <span class="sb-arena-town">${p.town}</span>
-                </div>
-                <div class="sb-score-cell" data-target="${p.score}">0</div>
+                <div class="sb-prize-cell">${KEY_LABELS[p.key]}</div>
             `;
 
             container.appendChild(row);
         });
-
-        animateScores();
-    }
-
-    // Count-up animation for scores
-    function animateScores() {
-        const cells = document.querySelectorAll('.sb-score-cell[data-target]');
-        cells.forEach((cell, i) => {
-            const target   = parseInt(cell.dataset.target, 10);
-            const duration = 1400 + i * 80;
-            const start    = performance.now() + 300 + i * 60;
-            let   rAF;
-
-            function step(now) {
-                if (now < start) { rAF = requestAnimationFrame(step); return; }
-                const elapsed  = now - start;
-                const progress = Math.min(elapsed / duration, 1);
-                // Ease out cubic
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const current = Math.round(eased * target);
-                cell.textContent = current.toLocaleString('de-DE');
-                if (progress < 1) rAF = requestAnimationFrame(step);
-            }
-            rAF = requestAnimationFrame(step);
-        });
-    }
-
-    // Timestamp
-    function setTimestamp() {
-        const el = document.getElementById('sbTimestamp');
-        const now = new Date();
-        const pad = n => String(n).padStart(2, '0');
-        el.textContent = `Stand: ${pad(now.getDate())}.${pad(now.getMonth()+1)}.${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
     }
 
     // ── Mouse parallax on panel ──────────────────────────────────────────────
@@ -965,9 +665,7 @@
     })();
 
     // ── Init ──────────────────────────────────────────────────────────────────
-    buildFilterButtons();
     renderRows();
-    setTimestamp();
     </script>
 </body>
 </html>
